@@ -23,15 +23,15 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String overallScore = "";
         if (scoreIsTie()) {
-            overallScore = TieConstructor(player1Score);
-        } else if (player1Score >= 4 || player2Score >= 4) {
+            overallScore = tieScoreToString(player1Score);
+        } else if (scoreIsAdvantageOrWin()) {
             int pointsDifference = player1Score - player2Score;
             if (pointsDifference == 1) overallScore = "Advantage player1";
             else if (pointsDifference == -1) overallScore = "Advantage player2";
             else if (pointsDifference >= 2) overallScore = "Win for player1";
             else overallScore = "Win for player2";
         } else {
-            overallScore = scoreConstructor(player1Score, player2Score);
+            overallScore = normalSituationScoreToString(player1Score, player2Score);
         }
         return overallScore;
     }
@@ -40,7 +40,12 @@ public class TennisGame1 implements TennisGame {
         return player1Score == player2Score;
     }
 
-    String convertScoreFromNumberToTennis(int scoreAsNumber) {
+    private boolean scoreIsAdvantageOrWin() {
+        return player1Score >= 4 || player2Score >= 4;
+    }
+
+
+    String convertScoreFromNumberToTennisTerm(int scoreAsNumber) {
         String scoreAsString = "";
         switch (scoreAsNumber) {
             case 0:
@@ -60,22 +65,26 @@ public class TennisGame1 implements TennisGame {
         return scoreAsString;
     }
 
-    private String scoreConstructor(int player1Score, int player2Score) {
-        return convertScoreFromNumberToTennis(player1Score) + "-" + convertScoreFromNumberToTennis(player2Score);
+    private String normalSituationScoreToString(int player1Score, int player2Score) {
+        return convertScoreFromNumberToTennisTerm(player1Score) + "-" + convertScoreFromNumberToTennisTerm(player2Score);
     }
 
-    private String TieConstructor(int tieScore) {
+    private String tieScoreToString(int tieScore) {
         String scoreAsString = "";
         switch (tieScore) {
             case 0:
             case 1:
             case 2:
-                scoreAsString += convertScoreFromNumberToTennis(tieScore) + "-All";
+                scoreAsString += convertScoreFromNumberToTennisTerm(tieScore) + "-All";
                 break;
             default:
                 scoreAsString += "Deuce";
                 break;
         }
         return scoreAsString;
+    }
+
+    private String advantageOrWinScoreToString(){
+        return null;
     }
 }
