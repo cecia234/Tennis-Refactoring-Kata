@@ -22,22 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String overallScore = "";
-        if (scoreIsTie()) {/*
-            switch (player1Score) {
-                case 0:
-                    overallScore = "Love-All";
-                    break;
-                case 1:
-                    overallScore = "Fifteen-All";
-                    break;
-                case 2:
-                    overallScore = "Thirty-All";
-                    break;
-                default:
-                    overallScore = "Deuce";
-                    break;
-
-            }*/
+        if (scoreIsTie()) {
             overallScore = TieConstructor(player1Score);
         } else if (player1Score >= 4 || player2Score >= 4) {
             int pointsDifference = player1Score - player2Score;
