@@ -22,7 +22,6 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String overallScore = "";
-        int scoreInAnalysis = 0;
         if (player1Score == player2Score) {
             switch (player1Score) {
                 case 0:
@@ -46,28 +45,7 @@ public class TennisGame1 implements TennisGame {
             else if (pointsDifference >= 2) overallScore = "Win for player1";
             else overallScore = "Win for player2";
         } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1)
-                    scoreInAnalysis = player1Score;
-                else {
-                    overallScore += "-";
-                    scoreInAnalysis = player2Score;
-                }
-                switch (scoreInAnalysis) {
-                    case 0:
-                        overallScore += "Love";
-                        break;
-                    case 1:
-                        overallScore += "Fifteen";
-                        break;
-                    case 2:
-                        overallScore += "Thirty";
-                        break;
-                    case 3:
-                        overallScore += "Forty";
-                        break;
-                }
-            }
+            overallScore = scoreConstructor(player1Score,player2Score);
         }
         return overallScore;
     }
