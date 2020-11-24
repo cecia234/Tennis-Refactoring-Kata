@@ -1,10 +1,12 @@
 
 public class TennisGame1 implements TennisGame {
     
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+    private int player1Score = 0;
+    private int player2Score = 0;
     private String player1Name;
     private String player2Name;
+    final String PLAYER1 = "player1";
+    final String PLAYER2 = "player2";
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -12,65 +14,65 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
+        if (playerName == PLAYER1)
+            player1Score += 1;
         else
-            m_score2 += 1;
+            player2Score += 1;
     }
 
     public String getScore() {
-        String score = "";
+        String overallScore = "";
         int tempScore=0;
-        if (m_score1==m_score2)
+        if (player1Score ==player2Score)
         {
-            switch (m_score1)
+            switch (player1Score)
             {
                 case 0:
-                        score = "Love-All";
+                        overallScore = "Love-All";
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                        overallScore = "Fifteen-All";
                     break;
                 case 2:
-                        score = "Thirty-All";
+                        overallScore = "Thirty-All";
                     break;
                 default:
-                        score = "Deuce";
+                        overallScore = "Deuce";
                     break;
                 
             }
         }
-        else if (m_score1>=4 || m_score2>=4)
+        else if (player1Score >=4 || player2Score>=4)
         {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+            int pointsDifference = player1Score -player2Score;
+            if (pointsDifference==1) overallScore ="Advantage player1";
+            else if (pointsDifference ==-1) overallScore ="Advantage player2";
+            else if (pointsDifference>=2) overallScore = "Win for player1";
+            else overallScore ="Win for player2";
         }
         else
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
+                if (i==1) tempScore = player1Score;
+                else { overallScore+="-"; tempScore = player2Score;}
                 switch(tempScore)
                 {
                     case 0:
-                        score+="Love";
+                        overallScore+="Love";
                         break;
                     case 1:
-                        score+="Fifteen";
+                        overallScore+="Fifteen";
                         break;
                     case 2:
-                        score+="Thirty";
+                        overallScore+="Thirty";
                         break;
                     case 3:
-                        score+="Forty";
+                        overallScore+="Forty";
                         break;
                 }
             }
         }
-        return score;
+        return overallScore;
     }
 }
