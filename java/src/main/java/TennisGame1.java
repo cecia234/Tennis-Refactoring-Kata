@@ -22,7 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String overallScore = "";
-        if (player1Score == player2Score) {
+        if (scoreIsTie()) {/*
             switch (player1Score) {
                 case 0:
                     overallScore = "Love-All";
@@ -37,7 +37,8 @@ public class TennisGame1 implements TennisGame {
                     overallScore = "Deuce";
                     break;
 
-            }
+            }*/
+            overallScore = TieConstructor(player1Score);
         } else if (player1Score >= 4 || player2Score >= 4) {
             int pointsDifference = player1Score - player2Score;
             if (pointsDifference == 1) overallScore = "Advantage player1";
@@ -45,9 +46,28 @@ public class TennisGame1 implements TennisGame {
             else if (pointsDifference >= 2) overallScore = "Win for player1";
             else overallScore = "Win for player2";
         } else {
-            overallScore = scoreConstructor(player1Score,player2Score);
+            overallScore = scoreConstructor(player1Score, player2Score);
         }
         return overallScore;
+    }
+
+    private boolean scoreIsTie() {
+        return player1Score == player2Score;
+    }
+
+    private String TieConstructor(int tieScore) {
+        String scoreAsString = "";
+        switch (tieScore) {
+            case 0:
+            case 1:
+            case 2:
+                scoreAsString += convertScoreFromNumberToTennis(tieScore) + "-All";
+                break;
+            default:
+                scoreAsString += "Deuce";
+                break;
+        }
+        return scoreAsString;
     }
 
     private String scoreConstructor(int player1Score, int player2Score) {
@@ -55,7 +75,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     String convertScoreFromNumberToTennis(int scoreAsNumber) {
-        String scoreAsString="";
+        String scoreAsString = "";
         switch (scoreAsNumber) {
             case 0:
                 scoreAsString = "Love";
