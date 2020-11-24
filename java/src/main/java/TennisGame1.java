@@ -6,15 +6,15 @@ public class TennisGame1 implements TennisGame {
     private String player1Name;
     private String player2Name;
     final String PLAYER1 = "player1";
-    final String PLAYER2 = "player2";
+
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
     }
 
-    public void wonPoint(String playerName) {
-        if (playerName == PLAYER1)
+    public void pointAssigner(String playerName) {
+        if (playerName.equals(PLAYER1))
             player1Score += 1;
         else
             player2Score += 1;
@@ -22,7 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String overallScore = "";
-        int tempScore = 0;
+        int scoreInAnalysis = 0;
         if (player1Score == player2Score) {
             switch (player1Score) {
                 case 0:
@@ -48,12 +48,12 @@ public class TennisGame1 implements TennisGame {
         } else {
             for (int i = 1; i < 3; i++) {
                 if (i == 1)
-                    tempScore = player1Score;
+                    scoreInAnalysis = player1Score;
                 else {
                     overallScore += "-";
-                    tempScore = player2Score;
+                    scoreInAnalysis = player2Score;
                 }
-                switch (tempScore) {
+                switch (scoreInAnalysis) {
                     case 0:
                         overallScore += "Love";
                         break;
@@ -70,5 +70,29 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return overallScore;
+    }
+
+    private String scoreConstructor(int player1Score, int player2Score) {
+        return convertScoreFromNumberToTennis(player1Score) + "-" + convertScoreFromNumberToTennis(player2Score);
+    }
+
+    String convertScoreFromNumberToTennis(int scoreAsNumber) {
+        String scoreAsString="";
+        switch (scoreAsNumber) {
+            case 0:
+                scoreAsString = "Love";
+                break;
+            case 1:
+                scoreAsString = "Fifteen";
+                break;
+            case 2:
+                scoreAsString = "Thirty";
+                break;
+            case 3:
+                scoreAsString = "Forty";
+                break;
+
+        }
+        return scoreAsString;
     }
 }
