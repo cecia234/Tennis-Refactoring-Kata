@@ -40,25 +40,6 @@ public class TennisGame1 implements TennisGame {
         return player1Score == player2Score;
     }
 
-    private String TieConstructor(int tieScore) {
-        String scoreAsString = "";
-        switch (tieScore) {
-            case 0:
-            case 1:
-            case 2:
-                scoreAsString += convertScoreFromNumberToTennis(tieScore) + "-All";
-                break;
-            default:
-                scoreAsString += "Deuce";
-                break;
-        }
-        return scoreAsString;
-    }
-
-    private String scoreConstructor(int player1Score, int player2Score) {
-        return convertScoreFromNumberToTennis(player1Score) + "-" + convertScoreFromNumberToTennis(player2Score);
-    }
-
     String convertScoreFromNumberToTennis(int scoreAsNumber) {
         String scoreAsString = "";
         switch (scoreAsNumber) {
@@ -75,6 +56,25 @@ public class TennisGame1 implements TennisGame {
                 scoreAsString = "Forty";
                 break;
 
+        }
+        return scoreAsString;
+    }
+
+    private String scoreConstructor(int player1Score, int player2Score) {
+        return convertScoreFromNumberToTennis(player1Score) + "-" + convertScoreFromNumberToTennis(player2Score);
+    }
+
+    private String TieConstructor(int tieScore) {
+        String scoreAsString = "";
+        switch (tieScore) {
+            case 0:
+            case 1:
+            case 2:
+                scoreAsString += convertScoreFromNumberToTennis(tieScore) + "-All";
+                break;
+            default:
+                scoreAsString += "Deuce";
+                break;
         }
         return scoreAsString;
     }
